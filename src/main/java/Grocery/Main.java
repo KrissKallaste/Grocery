@@ -1,13 +1,29 @@
 package Grocery;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
-    private static GroceryList groceryList = new GroceryList();
+    private static GroceryList groceryList;
 
     public static void main(String[] args) {
+
+        String url = "jdbc:mysql://localhost:3306/java30";
+        String user = "root";
+        String password = "Jannekallisemme1";
+        try {
+            Connection conn = DriverManager.getConnection(url, user, password);
+            groceryList = new GroceryList(conn);
+            System.out.println("All good");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
         boolean quit = false;
         int choice = 0;
@@ -62,8 +78,6 @@ public class Main {
                 scanner.nextLine();
             }
 
-
-
         }
 
     }
@@ -83,6 +97,8 @@ public class Main {
     public static void addItem(){
         System.out.println("Please enter the grocery item:");
         groceryList.addGroceryItem(scanner.nextLine());
+
+
     }
     public static void modifyItem(){
         System.out.println("Enter item number");
