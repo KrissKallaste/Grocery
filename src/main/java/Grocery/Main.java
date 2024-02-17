@@ -9,8 +9,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("This is grocery store");
-
         boolean quit = false;
         int choice = 0;
         printInstructions();
